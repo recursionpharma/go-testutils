@@ -1,14 +1,21 @@
-# Binaries for programs and plugins
-*.exe
-*.dll
-*.so
-*.dylib
+sync-microscope-images
+check-missing-images/check-missing-images
+tags
 
-# Test binary, build with `go test -c`
-*.test
+# govendor files
+/vendor/*
+!/vendor/vendor.json
 
-# Output of the go coverage tool, specifically when used with LiteIDE
-*.out
+# Created by https://www.gitignore.io/api/vim
 
-# Project-local glide cache, RE: https://github.com/Masterminds/glide/issues/736
-.glide/
+### Vim ###
+# swap
+[._]*.s[a-w][a-z]
+[._]s[a-w][a-z]
+# session
+Session.vim
+# temporary
+.netrwhist
+*~
+# auto-generated tag files
+tags

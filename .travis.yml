@@ -1,0 +1,21 @@
+language: go
+
+go:
+    - 1.8
+
+before_install:
+    - echo -e "machine github.com\n  login $CI_USER\n  password $CI_USER_PASSWORD" >> ~/.netrc
+    - chmod 600 ~/.netrc
+
+notifications:
+    email: false
+    slack: recursion:0WzOf6Vi22jv7tfIt4oyDrW6
+
+before_script: true
+install:
+    - go get -u gopkg.in/alecthomas/gometalinter.v1 && gometalinter.v1 --install
+    - go get -u github.com/kardianos/govendor && govendor sync
+script:
+    - go test -v ./...
+    - gometalinter.v1 --deadline=5m --disable=gotype --disable=gas --exclude=/go/src/ --concurrency=4 --vendor .
+after_script: true
