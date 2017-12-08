@@ -14,7 +14,7 @@ notifications:
 before_script: true
 install:
     - go get -u gopkg.in/alecthomas/gometalinter.v1 && gometalinter.v1 --install
-    - go get -u github.com/kardianos/govendor && govendor sync
+    - dep ensure
 script:
     - go test -v ./...
     - gometalinter.v1 --deadline=5m --disable=gotype --disable=gas --exclude=/go/src/ --concurrency=4 --vendor .
