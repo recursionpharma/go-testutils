@@ -1,2 +1,2 @@
-# go-test-utils
+# go-testutils
 Golang helpers for testing
