@@ -3,10 +3,6 @@ language: go
 go:
     - 1.8
 
-before_install:
-    - echo -e "machine github.com\n  login $CI_USER\n  password $CI_USER_PASSWORD" >> ~/.netrc
-    - chmod 600 ~/.netrc
-
 notifications:
     email: false
     slack: recursion:0WzOf6Vi22jv7tfIt4oyDrW6
