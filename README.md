@@ -121,7 +121,7 @@ Then our test might look like:
 ## This repo
 
     go-testutils/
-    |-- assertions
+    |-- assertions/
     |   contains custom assertions that work with goconvey
     |-- .editorconfig
     |   configures default for displaying files (e.g. in github PRs)
@@ -131,11 +131,11 @@ Then our test might look like:
     |   go dep file
     |-- Gopkg.toml
     |   go dep file
-    |-- httptest
+    |-- httptest/
     |   utilities for testing http
     |-- README.md
     |   this file
     `-- .travis.yml
-        travis configurations
+        travis configuration
 
-The above file tree was generated with `tree -a -L 1 --charset ascii`.
+The above file tree was generated with `tree -a -F -L 1 --charset ascii`.

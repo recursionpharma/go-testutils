@@ -3,7 +3,7 @@
 # top-most EditorConfig file
 root = true
 
-# Tell GitHub to display tabs as 4 spaces instead of 8 for Golang files
+# Tell GitHub to display tabs as 4 spaces instead of 8 for files
 [*.*]
 indent_style = tab
 indent_size = 4

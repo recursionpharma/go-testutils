@@ -2,7 +2,7 @@ sync-microscope-images
 check-missing-images/check-missing-images
 tags
 
-# govendor files
+# go gep files
 /vendor/*
 !/vendor/vendor.json
 
