@@ -1,0 +1,17 @@
+language: go
+
+go:
+    - 1.9
+
+notifications:
+    email: false
+    slack: recursion:0WzOf6Vi22jv7tfIt4oyDrW6
+
+before_script: true
+install:
+    - go get -u gopkg.in/alecthomas/gometalinter.v1 && gometalinter.v1 --install
+    - go get -u github.com/golang/dep/cmd/dep && dep ensure -v
+script:
+    - go test -v ./...
+    - gometalinter.v1 --deadline=5m --disable=gotype --disable=gas --exclude=/go/src/ --concurrency=4 --vendor .
+after_script: true
