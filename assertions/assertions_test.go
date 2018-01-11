@@ -1,9 +1,10 @@
-package assertions
+package assertions_test
 
 import (
 	"fmt"
 	"testing"
 
+	. "github.com/recursionpharma/go-testutils/assertions"
 	. "github.com/smartystreets/goconvey/convey"
 )
 

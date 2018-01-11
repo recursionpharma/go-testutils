@@ -1,4 +1,0 @@
-package httptest
-
-func ExampleStubClient() {
-}
