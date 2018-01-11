@@ -69,8 +69,6 @@ We might test it like this:
     |   go dep file
     |-- Gopkg.toml
     |   go dep file
-    |-- httptest/
-    |   utilities for testing http
     |-- README.md
     |   this file
     `-- .travis.yml
