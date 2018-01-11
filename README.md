@@ -56,68 +56,6 @@ We might test it like this:
         })
     }
 
-
-## HTTP Client
-
-A stub HTTP client for use in testing.
-
-Suppose we have some code that makes calls to the platelet API:
-
-    package platelet
-
-    import (
-        "net/http"
-
-        "github.com/recursionphamrma/go-httpclient"
-    )
-
-    type Client struct {
-        URL string
-        client httpclient.Client
-    }
-
-    func (c *Client) Get(path string) (*http.Response, error) {
-        return c.client.Get(c.URL + "/" + path)
-    }
-
-Then our test might look like:
-
-    package platelet_test
-
-    import (
-        "fmt"
-        "http"
-        "testing"
-
-        . "github.com/smartystreets/goconvey/convey"
-        . "github.com/recursionpharma/go-testutils/httptest"
-    )
-
-    func TestHTTPGetter(t *testing.T) {
-        t.Parallel()
-
-        Convey("Given a path", t, func() {
-
-            Convey("If there's an error, an error should be returned" func() {
-                client := &Client{
-                    client: NewStubClient(&StubResponse{Err: fmt.Errorf("Oh noes!"}),
-                }
-                resp, err := client.Get("some-path")
-                So(resp, ShouldBeNil)
-                So(err, ShouldNotBeNil)
-            })
-
-            Convey("If there's no error, a response should be returned" func() {
-                client := &Client{
-                    client: NewStubClient(&StubResponse{Resp: http.Response{StatusCode: http.StatusOK}}),
-                }
-                resp, err := client.Get("some-path")
-                So(resp, ShouldNotBeNil)
-                So(err, ShouldBeNil)
-            })
-        })
-    }
-
 ## This repo
 
     go-testutils/
