@@ -2,6 +2,8 @@
 
 Golang helpers for testing.
 
+*NOTE* This is a public repo.
+
 ## Assertions
 
 Contains custom assertions that work with [goconvey](https://github.com/smartystreets/goconvey).
