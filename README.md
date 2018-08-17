@@ -4,7 +4,23 @@ Golang helpers for testing.
 
 *NOTE* This is a public repo.
 
-## Assertions
+## Collection Assertions
+
+This repository includes several new assertions: `Any`, `All`, `None`, `AtLeast`, `AtMost`, and `Exactly`. These can be wrapped around existing assertions to perform the assertion on every element of a collection.
+
+Example:
+
+```golang
+So([]int{1, 2, 3, 4}, Any(ShouldEqual), 4)
+So([]int{1, 2, 3, 4}, Exactly(2, ShouldBeLessThan), 3)
+```
+This lets you perform an assertion on a collection without making assumptions regarding the order of the elements. For example:
+
+```golang
+So(printings, Any(ShouldHaveId), id)
+```
+
+## Other Assertions
 
 Contains custom assertions that work with [goconvey](https://github.com/smartystreets/goconvey).
 
