@@ -150,3 +150,12 @@ func ShouldHaveErrorMessageWithSubstring(actual interface{}, expected ...interfa
 
 	return convey.ShouldContainSubstring(err.Error(), msg)
 }
+
+func JoinComparisons(comparisons []string) string {
+	for _, comparison := range comparisons {
+		if comparison != "" {
+			return comparison
+		}
+	}
+	return ""
+}
