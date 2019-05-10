@@ -20,6 +20,40 @@ This lets you perform an assertion on a collection without making assumptions re
 So(printings, Any(ShouldHaveId), id)
 ```
 
+You may not want to write many different complex assertions like `ShouldHaveNameAndIdAndAddressAndBlah` to test multiple properties of a single collection element together, so the utility `JoinComparisons` can be used to construct these for you. For example:
+
+```golang
+type testStruct struct {
+  Name string
+  Id   int
+}
+
+testSlice := []testStruct{
+  testStruct{
+    Name: "Alice",
+    Id:   1,
+  },
+  testStruct{
+    Name: "Bob",
+    Id:   2,
+  },
+}
+
+So(testSlice, Exactly(1, func(actual interface{}, expected ...interface{}) string {
+  return JoinComparisons([]string{
+    ShouldEqual(actual.(testStruct).Name, "Alice"),
+    ShouldEqual(actual.(testStruct).Id, 1),
+  })
+}))
+
+So(testSlice, Exactly(1, func(actual interface{}, expected ...interface{}) string {
+  return JoinComparisons([]string{
+    ShouldEqual(actual.(testStruct).Name, "Bob"),
+    ShouldEqual(actual.(testStruct).Id, 2),
+  })
+}))
+```
+
 ## Other Assertions
 
 Contains custom assertions that work with [goconvey](https://github.com/smartystreets/goconvey).

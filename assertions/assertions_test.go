@@ -134,3 +134,41 @@ func TestShouldHaveErrorMessageWithSubstring(t *testing.T) {
 		})
 	})
 }
+
+func TestJoinComparisons(t *testing.T) {
+	Convey("Given a struct with properties", t, func() {
+
+		type testStruct struct {
+			Name string
+			Id   int
+		}
+
+		testSlice := []testStruct{
+			testStruct{
+				Name: "Alice",
+				Id:   1,
+			},
+			testStruct{
+				Name: "Bob",
+				Id:   2,
+			},
+		}
+
+		Convey("Properties can be tested dependently", func() {
+			So(testSlice, ShouldHaveLength, 2)
+			So(testSlice, Exactly(1, func(actual interface{}, expected ...interface{}) string {
+				return JoinComparisons([]string{
+					ShouldEqual(actual.(testStruct).Name, "Alice"),
+					ShouldEqual(actual.(testStruct).Id, 1),
+				})
+			}))
+			failureMessage := Exactly(2, func(actual interface{}, expected ...interface{}) string {
+				return JoinComparisons([]string{
+					ShouldEqual(actual.(testStruct).Name, "Bob"),
+					ShouldEqual(actual.(testStruct).Id, 2),
+				})
+			})(testSlice)
+			So(failureMessage, ShouldEqual, "Expected the collection (length 2) to contain exactly 2 passing elements, but it contained 1.\nFailures:\n\nExpected: 'Bob'\nActual:   'Alice'\n(Should be equal)")
+		})
+	})
+}
