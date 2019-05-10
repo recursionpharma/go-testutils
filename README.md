@@ -59,54 +59,55 @@ So(testSlice, Exactly(1, func(actual interface{}, expected ...interface{}) strin
 Contains custom assertions that work with [goconvey](https://github.com/smartystreets/goconvey).
 
 For example, if we have some code that returns an error:
+```golang
+package thehulk
 
-    package thehulk
+import (
+	"fmt"
+)
 
-    import (
-        "fmt"
-    )
+type Hulk struct {
+	isHulked bool
+}
 
-    type Hulk struct {
-        isHulked boolean
-    }
-
-    func (h *Hulk) Hulkify(angerLevel int) error {
-        if angerLevel < 3 {
-            return fmt.Errorf("Not angry enough: %d", angerLevel)
-        }
-        h.isHulked = true
-        return nil
-    }
-
+func (h *Hulk) Hulkify(angerLevel int) error {
+	if angerLevel < 3 {
+		return fmt.Errorf("Not angry enough: %d", angerLevel)
+	}
+	h.isHulked = true
+	return nil
+}
+```
 We might test it like this:
+```golang
+package thehulk_test
 
-    package thehulk_test
+import (
+	"fmt"
+	"testing"
 
-    import (
-        "fmt"
-        "testing"
+	. "github.com/smartystreets/goconvey/convey"
+	. "github.com/recursionpharma/go-testutils/assertions"
+)
 
-        . "github.com/smartystreets/goconvey/convey"
-        . "github.com/recursionpharma/go-testutils/assertions"
-    )
+func TestHulkify (t *testing.T) {
+	t.Parallel()
 
-    func TestHulkify (t *testing.T) {
-        t.Parallel()
+	Convey("Given an anger level", t, func() {
 
-        Convey("Given an anger level", t, func() {
+		Convey("If the anger is too low, an error should be returned", func() {
+			angerLevel := 2
+			err := h.Hulkify(angerLevel)
+			So(err, ShouldHaveErrorMessageWithSubstring, fmt.Sprintf("%d", angerLevel))
+		})
 
-            Convey("If the anger is too low, an error should be returned", func() {
-                angerLevel := 2
-                err := h.Hulkify(angerLevel)
-                So(err, ShouldHaveErrorMessageWithSubstring, fmt.Sprintf("%d", angerLevel))
-            })
-
-            Convey("If the anger is high enough, no error should be returned", func() {
-                err := h.Hulkify(5)
-                So(err, ShouldBeNil)
-            })
-        })
-    }
+		Convey("If the anger is high enough, no error should be returned", func() {
+			err := h.Hulkify(5)
+			So(err, ShouldBeNil)
+		})
+	})
+}
+```
 
 ## This repo
 
