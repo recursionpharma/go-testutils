@@ -1,3 +1,5 @@
+[![scorecard-score](https://github.com/recursionpharma/octo-guard-badges/blob/trunk/badges/repo/go-testutils/maturity_score.svg?raw=true)](https://infosec-docs.prod.rxrx.io/octoguard/scorecards/go-testutils)
+[![scorecard-status](https://github.com/recursionpharma/octo-guard-badges/blob/trunk/badges/repo/go-testutils/scorecard_status.svg?raw=true)](https://infosec-docs.prod.rxrx.io/octoguard/scorecards/go-testutils)
 # go-testutils
 
 Golang helpers for testing.
